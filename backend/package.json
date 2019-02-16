@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/Erislandio/Tcc/issues"
   },
-  "homepage": "https://github.com/Erislandio/Tcc#readme"
+  "homepage": "https://github.com/Erislandio/Tcc#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.13"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }
