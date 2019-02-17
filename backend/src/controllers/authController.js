@@ -1,6 +1,9 @@
 const express = require('express')
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
+const authConfig = require('../config/auth')
 
 const router = express.Router()
 
@@ -46,8 +49,13 @@ router.post('/authenticate', async (req, res) => {
     if (!await bcrypt.compare(password, user.password))
         return res.status(400).send({ Erro: "Senha incorreta" })
 
+    user.password = undefined
 
-    res.status(200).send({ user })
+    const token = jwt.sign({ id: user.id }, authConfig.secret, {
+        expiresIn: 86400
+    } )
+
+    res.status(200).send({ user, token })
 
 })
 
