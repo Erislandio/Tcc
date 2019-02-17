@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/user')
+const bcrypt = require('bcryptjs')
 
 const router = express.Router()
 
@@ -27,6 +28,26 @@ router.post('/register', async (req, res) => {
         return res.status(400).send({ error: "Erro no registro do usuário" })
 
     }
+
+})
+
+
+router.post('/authenticate', async (req, res) => {
+
+
+    const { email, password } = req.body
+
+    const user = await User.findOne({ email }).select('+password')
+
+    if (!user)
+        return res.status(400).send({ Erro: "Usuário não encontrado / email errado" })
+
+
+    if (!await bcrypt.compare(password, user.password))
+        return res.status(400).send({ Erro: "Senha incorreta" })
+
+
+    res.status(200).send({ user })
 
 })
 
