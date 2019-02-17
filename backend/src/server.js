@@ -8,8 +8,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-require('./app/controllers/authController')(app)
-require('./app/controllers/projectController')(app)
+require('./app/controllers/index')(app)
 
 app.listen(port, () => {
     console.log(`Servidor online na porta ${port}`)
