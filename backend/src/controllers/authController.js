@@ -7,6 +7,12 @@ const authConfig = require('../config/auth')
 
 const router = express.Router()
 
+function generateToken(params = {}) {
+    return jwt.sign(params, authConfig.secret, {
+        expiresIn: 86400
+    })
+}
+
 router.post('/register', async (req, res) => {
 
     const { email } = req.body
@@ -24,7 +30,11 @@ router.post('/register', async (req, res) => {
         user.password = undefined
 
 
-        return res.status(200).send({ user })
+        return res.status(200).send({
+            user,
+            token: generateToken({ id: user.id })
+
+        })
 
     } catch (error) {
 
@@ -51,11 +61,10 @@ router.post('/authenticate', async (req, res) => {
 
     user.password = undefined
 
-    const token = jwt.sign({ id: user.id }, authConfig.secret, {
-        expiresIn: 86400
-    } )
-
-    res.status(200).send({ user, token })
+    res.status(200).send({
+        user,
+        token: generateToken({ id: user.id })
+    })
 
 })
 
