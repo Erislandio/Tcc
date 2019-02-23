@@ -1,5 +1,7 @@
 const mongoose = require('../../database/index')
 const bcripty = require('bcryptjs')
+const relationship = require("mongoose-relationship");
+
 
 const ResultsSchema = new mongoose.Schema({
     id: {
@@ -22,7 +24,15 @@ const ResultsSchema = new mongoose.Schema({
         type: String,
         require: false
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        childPath:"User"
+    }
 })
 
+ResultsSchema.plugin(relationship, {relationshipPathName: "user"})
 const Results = mongoose.model('Results', ResultsSchema)
+
+
 module.exports = Results

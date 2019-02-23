@@ -1,6 +1,6 @@
 const mongoose = require('../../database/index')
 const bcrypt = require('bcryptjs')
-
+const relationship = require("mongoose-relationship");
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
         required: false,
         default: false
     },
+    results: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Results" 
+    }]
 })
 
 userSchema.pre('save', async function (next) {
