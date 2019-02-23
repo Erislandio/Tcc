@@ -3,6 +3,7 @@ const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
+const mailer = require('../../modules/mailer')
 
 const authConfig = require('../../config/auth')
 
@@ -88,18 +89,66 @@ router.post('/forgot_password', async (req, res) => {
         now.setHours(now.getHours() + 1)
 
 
-        await User.findOneAndUpdate(user.id, {
+        await User.findByIdAndUpdate(user.id, {
             '$set': {
                 passwordResetToken: token,
-                passwordResetExpires: now
+                passwordResetExpires: now,
             }
         })
 
-        console.log(token, now)
+        mailer.sendMail({
+            to: email,
+            from: 'erislandiosoares21@gmail.com',
+            template: "auth/forgotPassword",
+            context: { token },
+        }, (err) => {
+            if (err) {
+                return res.status(400).send({ erro: 'Não foi possível recuperar sua senha' })
+            }
 
+            res.status(200).send({ ok: true })
+        })
 
     } catch (err) {
         res.status(400).send({ erro: "Erro ao recuperar a senha tente novamente" })
+    }
+
+})
+
+router.post('/reset_password', async (req, res) => {
+
+    const { email, password, token } = req.body
+
+    try {
+
+        const user = await User.findOne({ email })
+            .select('+passwordResetToken passwordResetExpires')
+
+        if (!user) {
+            return res.status(400).send({ erro: "Usuário não encontrado." })
+        }
+
+        if (token !== user.passwordResetToken) {
+
+            console.log(token, user.passwordResetToken)
+
+            return res.status(400).send({ erro: "Token inválido" })
+        }
+
+        const now = new Date()
+
+        if (now > user.passwordResetExpires) {
+            return res.status(400).send({ erro: "Token expirado" })
+        }
+
+        user.password = password
+
+        await user.save()
+
+        res.send({ ok: true })
+
+    } catch (err) {
+        res.status(400).send({ erro: "Não foi possĩvel resetar a senha tente novamente.", ERRO: err })
     }
 
 })
