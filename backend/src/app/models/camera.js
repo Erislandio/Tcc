@@ -2,8 +2,8 @@ const mongoose = require('../../database/index')
 const bcripty = require('bcryptjs')
 
 const CameraSchema = new mongoose.Schema({
-
-    name: {
+    
+    Camera_name: {
         type: String,
     },
     tipo: {
@@ -12,6 +12,10 @@ const CameraSchema = new mongoose.Schema({
     qualidade: {
         type: String
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
 const Results = mongoose.model('Camera', CameraSchema)

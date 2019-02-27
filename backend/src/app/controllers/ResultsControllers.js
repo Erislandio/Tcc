@@ -9,12 +9,6 @@ const User = require('../models/user')
 
 router.use(authMiddleware)
 
-router.get('/', async (req, res) => {
-
-
-
-})
-
 router.get('/list', async (req, res) => {
 
     try {
@@ -34,14 +28,14 @@ router.post('/create', async (req, res) => {
 
         const user = await User.findById(req.userId)
 
-        await User.findOneAndUpdate(user, {
-            results: req.body
-        })
+        const { Camera_name, tipo, qualidade, id, resultado, imagem, condicoes_ambiente } = req.body
+
+        const results = await Results.create({ id, resultado, imagem, condicoes_ambiente, user })
+
+        const camera = await Camera.create({ Camera_name, tipo, qualidade, user })
 
 
-        const results = await Results.create({ ...req.body, user })
-
-        return res.status(200).send({ results })
+        return res.status(200).send({ results, camera })
 
     } catch (err) {
         console.log(err)
@@ -50,13 +44,19 @@ router.post('/create', async (req, res) => {
 
 })
 
-router.put('/:resultId', async (req, res) => {
+// ! get current user
+router.get('/current', async (req, res) => {
 
-})
+    try {
 
-router.delete('/:resultId', async (req, res) => {
+        const user = await User.findById(req.userId)
 
+        return res.status(200).send({ user })
 
+    } catch (error) {
+
+        return res.status(400).send({ erro, erro: "Não foi possivel consultar o usuário." })
+    }
 
 })
 

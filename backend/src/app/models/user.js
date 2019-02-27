@@ -37,8 +37,12 @@ const userSchema = new mongoose.Schema({
     },
     results: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Results" 
-    }]
+        ref: "Results"
+    }],
+    camera: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Camera"
+    }
 })
 
 userSchema.pre('save', async function (next) {
