@@ -62,6 +62,7 @@ router.post('/authenticate', async (req, res) => {
         return res.status(400).send({ Erro: "Senha incorreta" })
 
     user.password = undefined
+    user.results = undefined
 
     res.status(200).send({
         user,
