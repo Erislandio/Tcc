@@ -9,42 +9,39 @@ const User = require('../models/user')
 
 router.use(authMiddleware)
 
-router.get('/list', async (req, res) => {
 
-    try {
-        const user = await User.findById(req.userId)
-
-        return res.status(400).send(user.results)
-
-    } catch (error) {
-        return res.status(400).send({ erro: "Não foi possível listar o resultado" })
-    }
-
-})
+// * create results
 
 router.post('/create', async (req, res) => {
 
     try {
 
-        const { 
+        const {
             camera_name,
-            tipo, qualidade,
+            tipo,
+            qualidade,
+            imagem,
             resultado,
             condicoes_ambiente
         } = req.body
 
         const u = await User.findById(req.userId)
 
+        const results = await Results.create({ resultado, condicoes_ambiente, imagem, user: u })
+
         const user = await User.findByIdAndUpdate(req.userId, {
             $push: {
-                results: await Results.create({ ...req.body, u })
-            }
+                results: results
+            },
+            camera: await Camera.create({ camera_name, tipo, qualidade })
         })
 
         const resultados = await Results.find({ _id: { $in: user.results } })
 
+        const camera = await Camera.find({ _id: user.camera })
+
         user.results = undefined
-        return res.status(200).send({ user, resultados })
+        return res.status(200).send({ user, resultados, camera })
 
     } catch (err) {
         console.log(err)
@@ -53,7 +50,7 @@ router.post('/create', async (req, res) => {
 
 })
 
-
+// * get results users
 router.get('/result', async (req, res) => {
 
     try {
