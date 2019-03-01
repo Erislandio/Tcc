@@ -25,6 +25,14 @@ router.get('/list', async (req, res) => {
 router.post('/create', async (req, res) => {
 
     try {
+
+        const { 
+            camera_name,
+            tipo, qualidade,
+            resultado,
+            condicoes_ambiente
+        } = req.body
+
         const u = await User.findById(req.userId)
 
         const user = await User.findByIdAndUpdate(req.userId, {
@@ -50,11 +58,10 @@ router.get('/result', async (req, res) => {
 
     try {
 
-        const { id } = req.body
+        const user = await User.findById(req.userId)
+        const resultados = await Results.find({ _id: { $in: user.results } })
 
-        const result = await Results.findOne({ _id: id })
-
-        return res.status(200).send(result)
+        return res.status(200).send({ resultados })
 
     } catch (error) {
         return res.status(400).send({ error, erro: "Não foi possivel consultar o resultado" })

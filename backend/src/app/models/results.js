@@ -1,10 +1,6 @@
 const mongoose = require('../../database/index')
 
 const ResultsSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true
-    },
     resultado: {
         type: String,
         require: true

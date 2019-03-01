@@ -3,7 +3,7 @@ const bcripty = require('bcryptjs')
 
 const CameraSchema = new mongoose.Schema({
     
-    Camera_name: {
+    camera_name: {
         type: String,
     },
     tipo: {
