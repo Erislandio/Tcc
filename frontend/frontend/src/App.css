@@ -57,3 +57,32 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+li.menu-a.item-hover:hover > div {
+	display: block;
+}
+
+div#main {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: #f2f2f2;
+}
+
+h1.sobre-title {
+  margin: 20px 0px;
+  font-size: 28px;
+}
+
+@media (max-width: 767px){
+  div#main{
+      padding-top: 50px;
+  }
+}

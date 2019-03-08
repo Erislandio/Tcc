@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import './footer.css'
+
 
 class Footer extends Component {
     render() {
         return (
-            <div>
-                Footer
-            </div>
+            <footer className="rodape">
+                <div className="footer-content">
+                    <span>Desenvolvido por Erislândio, Ronaldo, Tiago e Wagner</span>
+                </div>
+            </footer>
         );
     }
 }

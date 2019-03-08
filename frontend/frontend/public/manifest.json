@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SeeEye",
+  "name": "Aplicativo detecção doenças por imagens",
   "icons": [
     {
       "src": "favicon.ico",
