@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
 
         // * caso o usuário já possua um cadastro
         if (await User.findOne({ email }))
-            return res.status(400).send({ Erro: 'Usuário já possui uma conta' })
+            return res.send({ Erro: 'Usuário já possui uma conta' })
 
         const user = await User.create(req.body)
 
@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
 
     } catch (error) {
 
-        return res.status(400).send({ error: "Erro no registro do usuário" })
+        return res.send({ error: "Erro no registro do usuário" })
 
     }
 
@@ -55,7 +55,7 @@ router.post('/authenticate', async (req, res) => {
     const user = await User.findOne({ email }).select('+password')
 
     if (!user)
-        return res.status(400).send({ Erro: "Usuário não encontrado / email errado" })
+        return res.send({ Erro: "Usuário não encontrado / email errado" })
 
 
     if (!await bcrypt.compare(password, user.password))
@@ -79,7 +79,7 @@ router.post('/forgot_password', async (req, res) => {
         const user = await User.findOne({ email })
 
         if (!user) {
-            return res.status(400).send({ error: "Usuário não encontrado" })
+            return res.send({ error: "Usuário não encontrado" })
         }
 
         // ! gerar token
@@ -126,7 +126,7 @@ router.post('/reset_password', async (req, res) => {
             .select('+passwordResetToken passwordResetExpires')
 
         if (!user) {
-            return res.status(400).send({ erro: "Usuário não encontrado." })
+            return res.send({ erro: "Usuário não encontrado." })
         }
 
         if (token !== user.passwordResetToken) {
@@ -139,7 +139,7 @@ router.post('/reset_password', async (req, res) => {
         const now = new Date()
 
         if (now > user.passwordResetExpires) {
-            return res.status(400).send({ erro: "Token expirado" })
+            return res.send({ erro: "Token expirado" })
         }
 
         user.password = password
@@ -149,7 +149,7 @@ router.post('/reset_password', async (req, res) => {
         res.send({ ok: true })
 
     } catch (err) {
-        res.status(400).send({ erro: "Não foi possĩvel resetar a senha tente novamente.", ERRO: err })
+        res.send({ erro: "Não foi possĩvel resetar a senha tente novamente.", ERRO: err })
     }
 
 })

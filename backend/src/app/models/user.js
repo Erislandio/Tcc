@@ -1,6 +1,5 @@
 const mongoose = require('../../database/index')
 const bcrypt = require('bcryptjs')
-const relationship = require("mongoose-relationship");
 
 const userSchema = new mongoose.Schema({
     name: {
