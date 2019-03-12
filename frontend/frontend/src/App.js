@@ -7,24 +7,54 @@ import Routers from './Routers';
 
 
 import { BrowserRouter } from "react-router-dom";
+import Loader from './components/helpers/Loader';
+
 
 
 class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="app">
-          <Header />
-          <div id="main">
-            <Container>
-              <Routers />
-            </Container>
-          </div>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    );
-  }
+
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: null,
+            loader: true
+        }
+    }
+
+
+    componentDidMount() {
+        const user = sessionStorage.getItem('data')
+
+        if (user) {
+            const jsonUser = JSON.parse(user)
+            this.setState({ user: jsonUser, loader: false })
+        }
+        else {
+            this.setState({ loader: false })
+        }
+    }
+
+    render() {
+        return (
+            this.state.loader ? (
+                <Loader />
+            ) : (
+                    <BrowserRouter>
+                        <div className="app">
+                            <Header user={this.state.user ? this.state.user.data.user : null} />
+                            <div id="main">
+                                <Container>
+                                    <Routers />
+                                </Container>
+                            </div>
+                            <Footer />
+                        </div>
+                    </BrowserRouter>
+                )
+        );
+    }
 }
 
 export default App;

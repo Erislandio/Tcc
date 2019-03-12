@@ -4,7 +4,7 @@ class Camera extends Component {
     render() {
         return (
             <div>
-                
+                camera
             </div>
         );
     }

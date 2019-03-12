@@ -5,8 +5,8 @@ import Login from './components/login/Login'
 import Sobre from './components/sobre/Sobre'
 import Register from './components/login/Register'
 import Contatos from './components/contatos/Contatos';
-
-
+import Account from './components/account/Account';
+import Camera from './components/teste/Camera';
 
 export default props => (
     <Switch >
@@ -15,6 +15,8 @@ export default props => (
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/contatos" component={Contatos} />
-
+        <Route path="/account" component={Account} />
+        <Route path="/teste/camera" component={Camera} />
+        <Route path="/teste/imagem" component={File} />
     </Switch>
 )

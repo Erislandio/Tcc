@@ -5,8 +5,8 @@ class SpotContato extends Component {
         return (
             <aside class="profile-card">
                 <header>
-                    <a target="_blank" href="#">
-                        <img src="http://lorempixel.com/150/150/people/" class="hoverZoomLink" />
+                    <a target="_blank" href="">
+                        <img src={this.props.imagem} class="hoverZoomLink" />
                     </a>
                     <h1>{this.props.name}</h1>
                     <h2>{this.props.email}</h2>

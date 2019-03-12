@@ -45,3 +45,10 @@ aside.profile-card img {
     text-transform: capitalize;
     font-weight: bold;
 }
+
+aside.profile-card img {
+    width: 150px;
+}
+aside.profile-card h2 {
+    font-size: 14px;
+}

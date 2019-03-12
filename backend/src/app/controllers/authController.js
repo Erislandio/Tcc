@@ -59,7 +59,7 @@ router.post('/authenticate', async (req, res) => {
 
 
     if (!await bcrypt.compare(password, user.password))
-        return res.status(400).send({ Erro: "Senha incorreta" })
+        return res.send({ Erro: "Senha incorreta" })
 
     user.password = undefined
     user.results = undefined
@@ -104,14 +104,14 @@ router.post('/forgot_password', async (req, res) => {
             context: { token },
         }, (err) => {
             if (err) {
-                return res.status(400).send({ erro: 'Não foi possível recuperar sua senha' })
+                return res.send({ erro: 'Não foi possível recuperar sua senha' })
             }
 
             res.status(200).send({ ok: true })
         })
 
     } catch (err) {
-        res.status(400).send({ erro: "Erro ao recuperar a senha tente novamente" })
+        res.send({ erro: "Erro ao recuperar a senha tente novamente" })
     }
 
 })
@@ -133,7 +133,7 @@ router.post('/reset_password', async (req, res) => {
 
             console.log(token, user.passwordResetToken)
 
-            return res.status(400).send({ erro: "Token inválido" })
+            return res.send({ erro: "Token inválido" })
         }
 
         const now = new Date()

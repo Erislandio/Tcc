@@ -1,0 +1,34 @@
+.spot-user {
+    padding: 35px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 3px 2px 14px rgba(0, 0, 0, 0.2);
+    border: 1px solid #dedede;
+}
+
+.name-user {
+    padding: 10px 0px;;
+}
+
+.results {
+    padding: 35px;
+    margin-top: 25px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 3px 2px 14px rgba(0, 0, 0, 0.2);
+    border: 1px solid #dedede;
+}
+
+.not-results {
+    padding: 20px 0px;
+    text-align: center;
+}
+
+a.link-camera {
+    display: block;
+    margin-top: 10px;
+}
+
+div#account h1 {
+    font-size: 28px;
+}

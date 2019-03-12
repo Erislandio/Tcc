@@ -10,13 +10,20 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            open: false
+            open: false,
         }
 
     }
 
+    logout(e) {
+        e.preventDefault()
+        sessionStorage.setItem('data', null)
+        window.location.href = '/home'
+    }
 
     render() {
+        console.log(this)
+        const { user } = this.props
         return (
             <header className="header">
                 <Container>
@@ -34,8 +41,16 @@ class Header extends Component {
                                 <li className="menu-a item-hover" onClick={e => this.setState({ open: !this.state.open })}>Testes
                                     <div className="dropdown-menu-1">
                                         <ul>
-                                            <li className="dropdown-item">Camera</li>
-                                            <li className="dropdown-item">Imagem</li>
+                                            <li className="dropdown-item">
+                                                <Link to="teste/camera">
+                                                    Camera
+                                                </Link>
+                                            </li>
+                                            <li className="dropdown-item">
+                                                <Link to="teste/file">
+                                                    Imagem
+                                                </Link>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
@@ -55,7 +70,33 @@ class Header extends Component {
                             </ul>
                         </nav>
                         <div className="login">
-                            <Link to="/login">login</Link>
+                            {
+                                user ? (
+                                    <React.Fragment>
+                                        <Link to="/account">
+                                            {
+                                                user.name.split(' ')[0]
+                                            }
+                                        </Link>
+
+                                        <div className="drop-down-account">
+                                            <ul>
+                                                <li className
+                                                    ="logout" onClick={e => this.logout(e)}>
+                                                    Logout
+                                                </li>
+                                                <li>
+                                                    <Link to="/account">
+                                                        Account
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </React.Fragment>
+                                ) : (
+                                        <Link to="/login">login</Link>
+                                    )
+                            }
                         </div>
                         <div className={"container-menu " + (this.state.open ? ' change ' : '')} onClick={e => this.setState({ open: !this.state.open })}>
                             <div className="bar1"></div>
