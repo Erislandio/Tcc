@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './header.css'
 import { Container } from 'reactstrap'
+
 import { Link } from "react-router-dom";
 
 
@@ -12,7 +13,6 @@ class Header extends Component {
         this.state = {
             open: false,
         }
-
     }
 
     logout(e) {
@@ -29,25 +29,25 @@ class Header extends Component {
                 <Container>
                     <div className="header-content container">
                         <div className="logo">
-                            <Link to="/home/">
-                                <img src="https://ronaldo-caetano.000webhostapp.com/Logo%20png.png" height="25" width="65" alt="SeEye" />
+                            <Link to="/home">
+                                <img src="https://ronaldo-caetano.000webhostapp.com/Logo%20png.png" height="25" width="65" alt="SeeEye" />
                             </Link>
                         </div>
                         <nav className={" nav " + (this.state.open ? ' open ' : '')}>
                             <ul>
                                 <li className="menu-a" onClick={e => this.setState({ open: !this.state.open })}>
-                                    <Link to="/home/">Home</Link>
+                                    <Link to="/home">Home</Link>
                                 </li>
                                 <li className="menu-a item-hover" onClick={e => this.setState({ open: !this.state.open })}>Testes
                                     <div className="dropdown-menu-1">
                                         <ul>
                                             <li className="dropdown-item">
-                                                <Link to="teste/camera">
+                                                <Link to="/teste/camera">
                                                     Camera
                                                 </Link>
                                             </li>
                                             <li className="dropdown-item">
-                                                <Link to="teste/file">
+                                                <Link to="/teste/file">
                                                     Imagem
                                                 </Link>
                                             </li>
@@ -65,7 +65,20 @@ class Header extends Component {
                                     </Link>
                                 </li>
                                 <li className="login-a-mobile" onClick={e => this.setState({ open: !this.state.open })}>
-                                    <Link to="/login/">Login</Link>
+                                {
+                                user ? (
+                                    <React.Fragment>
+                                        <Link to="/account">
+                                            {
+                                               'Account'
+                                            }
+                                        </Link>
+
+                                    </React.Fragment>
+                                ) : (
+                                        <Link to="/login">login</Link>
+                                    )
+                            }
                                 </li>
                             </ul>
                         </nav>

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Login from './components/login/Login'
 import Sobre from './components/sobre/Sobre'
@@ -7,6 +6,9 @@ import Register from './components/login/Register'
 import Contatos from './components/contatos/Contatos';
 import Account from './components/account/Account';
 import Camera from './components/teste/Camera';
+
+import { Switch, Route } from "react-router-dom";
+
 
 export default props => (
     <Switch >

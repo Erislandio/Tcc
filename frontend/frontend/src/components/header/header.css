@@ -175,6 +175,35 @@ li.dropdown-item {
     .login {
         display: none;
     }
+    .dropdown-menu-1 {
+        background: transparent !important;
+        position: relative;
+        text-align: center;
+        height: auto;
+        width: 100%;
+        text-align: center;
+        box-shadow: none;
+        padding: 0px;
+        display: block !important;
+        left: auto;
+        top: auto;
+    }
+
+    .dropdown-menu-1 ul li {
+        text-align: center !important;
+    }
+
+    .dropdown-menu-1 ul li  a{
+        color: #fff !important;
+    }
+    .dropdown-menu-1 ul {
+        padding: 0px;
+        justify-content: center !important;
+    }
+
+    .dropdown-menu-1:before{
+        display: none;
+    }
 }
 
 .drop-down-account {

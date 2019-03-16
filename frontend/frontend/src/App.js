@@ -6,7 +6,10 @@ import './App.css';
 import Routers from './Routers';
 
 
+// ! importa isso
 import { BrowserRouter } from "react-router-dom";
+
+
 import Loader from './components/helpers/Loader';
 
 
@@ -21,6 +24,10 @@ class App extends Component {
             user: null,
             loader: true
         }
+
+        setTimeout(function(){
+            alert('')
+        }, 3000);
     }
 
 
@@ -58,3 +65,5 @@ class App extends Component {
 }
 
 export default App;
+
+// * agora cria um comp chamado Routers

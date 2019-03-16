@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 20px;
 }
 
 aside.profile-card {
@@ -28,6 +29,15 @@ aside.profile-card {
     border: 1px solid #dedede;
 }
 
+h1.equipe {
+    text-align: center;
+    margin: 20px;
+    font-size: 30px;
+    color: #333;
+}
+
+
+
 ul.profile-social-links {
     max-width: 200px;
     width: 100%;
@@ -48,7 +58,14 @@ aside.profile-card img {
 
 aside.profile-card img {
     width: 150px;
+    height: 150px;
 }
 aside.profile-card h2 {
     font-size: 14px;
+}
+
+@media (min-width: 768px){
+    h1.equipe{
+        margin-top: 70px;
+    }
 }
