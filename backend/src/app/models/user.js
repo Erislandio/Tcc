@@ -29,11 +29,6 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    admin: {
-        type: Boolean,
-        required: false,
-        default: false
-    },
     results: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Results"

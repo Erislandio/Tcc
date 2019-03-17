@@ -3,6 +3,7 @@ import Loader from '../helpers/Loader';
 import './account.css'
 import { Link } from 'react-router-dom'
 
+
 class Account extends Component {
 
     constructor(props) {
@@ -12,8 +13,8 @@ class Account extends Component {
             user: null,
             loader: true
         }
-    }
 
+    }
 
     componentDidMount() {
         const user = sessionStorage.getItem('data')
@@ -24,11 +25,11 @@ class Account extends Component {
         } else {
             window.location.href = "/home"
         }
-
     }
 
     render() {
-        console.log(this)
+        const results = this.props.results["results"]
+        console.log(results)
         return (
             this.state.loader ? (
                 <Loader />
@@ -47,26 +48,59 @@ class Account extends Component {
                                 </h2>
                             </div>
                         </div>
-                        <div className="results">
-                            <h1 className="results-title">
-                                Resultados
-                            </h1>
+                        <div className="resultados-wrapper">
                             {
-                                this.state.user.data.user.results != false ? (
-                                    <div></div>
+                                this.props.results ? (
+                                    <div className="results-content">
+                                        <h1 className="results-title">Resultados encontrados: {results.length}</h1>
+                                        {
+                                            results.map((result, i) => {
+                                                return (
+                                                    <div className="result-card" key={i}>
+                                                        <p className="contagem-result">
+                                                            <b className="date-b">Data do teste:</b>
+                                                            {
+                                                                new Date(result.data_resultado).toLocaleString()
+                                                            }
+                                                        </p>
+                                                        <div className="img-result">
+                                                            {
+                                                                result.image
+                                                            }
+                                                        </div>
+                                                        <div className="result-text">
+                                                            <b className="result-b">Resultado gerado:</b>
+                                                            <span>{
+                                                                result.resultado
+                                                            }</span>
+                                                            <span className="cond">
+                                                                <b className="amb-b">Condições de ambiente:</b>
+                                                                {result.condicoes_ambiente}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 ) : (
-                                        <div className="not-results">
-                                            <h2 className="title-not">
-                                                Não foram encontrados Resultados.
+                                        <div className="results">
+                                            <h1 className="results-title">Resultados</h1>
+                                            <div className="not-results">
+                                                <h2 className="title-not">
+                                                    Não foram encontrados Resultados.
                                                 <Link to="/camera" className="link-camera">
-                                                    Clique aqui para realizar o teste com a camera
+                                                        Clique aqui para realizar o teste com a camera
                                                 </Link>
-                                            </h2>
+                                                </h2>
+                                            </div>
                                         </div>
                                     )
                             }
+
                         </div>
                     </div>
+
                 )
         );
     }

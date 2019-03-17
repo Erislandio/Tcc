@@ -35,25 +35,27 @@ class Header extends Component {
                         </div>
                         <nav className={" nav " + (this.state.open ? ' open ' : '')}>
                             <ul>
-                                <li className="menu-a" onClick={e => this.setState({ open: !this.state.open })}>
-                                    <Link to="/home">Home</Link>
-                                </li>
-                                <li className="menu-a item-hover" onClick={e => this.setState({ open: !this.state.open })}>Testes
-                                    <div className="dropdown-menu-1">
-                                        <ul>
-                                            <li className="dropdown-item">
-                                                <Link to="/teste/camera">
-                                                    Camera
+                                {
+                                    this.props.user ? (
+                                        <li className="menu-a item-hover" onClick={e => this.setState({ open: !this.state.open })}>Testes
+                                            <div className="dropdown-menu-1">
+                                                <ul>
+                                                    <li className="dropdown-item">
+                                                        <Link to="/teste/camera">
+                                                            Camera
                                                 </Link>
-                                            </li>
-                                            <li className="dropdown-item">
-                                                <Link to="/teste/file">
-                                                    Imagem
+                                                    </li>
+                                                    <li className="dropdown-item">
+                                                        <Link to="/teste/file">
+                                                            Imagem
                                                 </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    ) : null
+                                }
+
                                 <li className="menu-a" onClick={e => this.setState({ open: !this.state.open })}>
                                     <Link to="/contatos/">
                                         Contatos
@@ -65,20 +67,20 @@ class Header extends Component {
                                     </Link>
                                 </li>
                                 <li className="login-a-mobile" onClick={e => this.setState({ open: !this.state.open })}>
-                                {
-                                user ? (
-                                    <React.Fragment>
-                                        <Link to="/account">
-                                            {
-                                               'Account'
-                                            }
-                                        </Link>
+                                    {
+                                        user ? (
+                                            <React.Fragment>
+                                                <Link to="/account">
+                                                    {
+                                                        'Account'
+                                                    }
+                                                </Link>
 
-                                    </React.Fragment>
-                                ) : (
-                                        <Link to="/login">login</Link>
-                                    )
-                            }
+                                            </React.Fragment>
+                                        ) : (
+                                                <Link to="/login">login</Link>
+                                            )
+                                    }
                                 </li>
                             </ul>
                         </nav>

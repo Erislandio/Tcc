@@ -4,14 +4,12 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import './App.css';
 import Routers from './Routers';
+import axios from 'axios'
 
-
-// ! importa isso
 import { BrowserRouter } from "react-router-dom";
-
-
 import Loader from './components/helpers/Loader';
 
+const base_url = "http://localhost:3000/results/result"
 
 
 class App extends Component {
@@ -22,14 +20,11 @@ class App extends Component {
 
         this.state = {
             user: null,
-            loader: true
+            loader: true,
+            results: []
         }
 
-        setTimeout(function(){
-            alert('')
-        }, 3000);
     }
-
 
     componentDidMount() {
         const user = sessionStorage.getItem('data')
@@ -37,13 +32,40 @@ class App extends Component {
         if (user) {
             const jsonUser = JSON.parse(user)
             this.setState({ user: jsonUser, loader: false })
+
+            const { data: { token } } = jsonUser
+
+            let config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+
+            axios.get(
+                base_url,
+                config
+            ).then(data => {
+
+                const { data: { resultados } } = data
+
+                if (resultados) {
+                    this.setState({ results: resultados })
+                } else {
+                    return null
+                }
+            })
         }
         else {
             this.setState({ loader: false })
         }
+
     }
 
     render() {
+        
+        const { results } = this.state
+
         return (
             this.state.loader ? (
                 <Loader />
@@ -53,7 +75,7 @@ class App extends Component {
                             <Header user={this.state.user ? this.state.user.data.user : null} />
                             <div id="main">
                                 <Container>
-                                    <Routers />
+                                    <Routers results={results} />
                                 </Container>
                             </div>
                             <Footer />
@@ -66,4 +88,3 @@ class App extends Component {
 
 export default App;
 
-// * agora cria um comp chamado Routers
