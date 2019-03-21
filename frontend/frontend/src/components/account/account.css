@@ -8,7 +8,10 @@
 
 .name-user {
     padding: 10px 0px;
-    ;
+}
+
+.spot-user.user-results {
+    margin-top: 75px;
 }
 
 .results {

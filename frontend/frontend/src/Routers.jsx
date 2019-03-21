@@ -19,13 +19,5 @@ export default props => (
         <Route path="/account" render={() => <Account results={props} />} />
         <Route path="/teste/camera" component={Camera} />
         <Route path="/teste/file" component={File} />
-        {
-            props ? (
-                <Redirect to="/account" />
-            ) : (
-                    <Redirect to="/login" />
-
-                )
-        }
     </Switch>
 )

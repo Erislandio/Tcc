@@ -28,42 +28,46 @@ class App extends Component {
 
     componentDidMount() {
         const user = sessionStorage.getItem('data')
-
+        console.log(user)
         if (user) {
             const jsonUser = JSON.parse(user)
             this.setState({ user: jsonUser, loader: false })
 
-            const { data: { token } } = jsonUser
+            console.log("json", jsonUser)
 
-            let config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${token}`
+            if (jsonUser != null) {
+                const { data: { token } } = jsonUser
+
+                let config = {
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${token}`
+                    }
                 }
+
+                axios.get(
+                    base_url,
+                    config
+                ).then(data => {
+
+                    const { data: { resultados } } = data
+
+                    if (resultados) {
+                        this.setState({ results: resultados })
+                    } else {
+                        return null
+                    }
+                })
+            } else {
+                this.setState({ loader: false })
             }
-
-            axios.get(
-                base_url,
-                config
-            ).then(data => {
-
-                const { data: { resultados } } = data
-
-                if (resultados) {
-                    this.setState({ results: resultados })
-                } else {
-                    return null
-                }
-            })
-        }
-        else {
+        } else {
             this.setState({ loader: false })
         }
-
     }
 
     render() {
-        
+
         const { results } = this.state
 
         return (

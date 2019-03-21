@@ -188,21 +188,27 @@ li.dropdown-item {
         left: auto;
         top: auto;
     }
-
     .dropdown-menu-1 ul li {
         text-align: center !important;
     }
-
-    .dropdown-menu-1 ul li  a{
+    .dropdown-menu-1 ul li a {
         color: #fff !important;
     }
     .dropdown-menu-1 ul {
         padding: 0px;
         justify-content: center !important;
     }
-
-    .dropdown-menu-1:before{
+    .dropdown-menu-1:before {
         display: none;
+    }
+    li.menu-a.item-hover {
+        padding: 0px;
+    }
+    li.menu-a.item-hover {
+        font-size: 0px;
+    }
+    li.dropdown-item a {
+        font-size: 16px;
     }
 }
 

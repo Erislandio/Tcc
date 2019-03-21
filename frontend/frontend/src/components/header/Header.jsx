@@ -11,14 +11,14 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            open: false,
+            open: false
         }
     }
 
     logout(e) {
         e.preventDefault()
         sessionStorage.setItem('data', null)
-        window.location.href = '/home'
+        window.location.href = '/login'
     }
 
     render() {
@@ -41,14 +41,10 @@ class Header extends Component {
                                             <div className="dropdown-menu-1">
                                                 <ul>
                                                     <li className="dropdown-item">
-                                                        <Link to="/teste/camera">
-                                                            Camera
-                                                </Link>
+                                                        <Link to="/teste/camera">Camera</Link>
                                                     </li>
                                                     <li className="dropdown-item">
-                                                        <Link to="/teste/file">
-                                                            Imagem
-                                                </Link>
+                                                        <Link to="/teste/file">Imagem</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -76,6 +72,10 @@ class Header extends Component {
                                                     }
                                                 </Link>
 
+                                                <li className="logout" onClick={e => this.logout(e)}>
+                                                    Logout
+                                                </li>
+
                                             </React.Fragment>
                                         ) : (
                                                 <Link to="/login">login</Link>
@@ -93,7 +93,6 @@ class Header extends Component {
                                                 user.name.split(' ')[0]
                                             }
                                         </Link>
-
                                         <div className="drop-down-account">
                                             <ul>
                                                 <li className
