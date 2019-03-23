@@ -16,6 +16,8 @@ function capturar() {
 
     $(img).on('load', function () {
 
+      // ! 
+
       if ($("div#plot").length) {
         while ($("div#plot").length > 0) {
           document.getElementById('plot').remove();

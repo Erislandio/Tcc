@@ -1,33 +1,21 @@
 import React, { Component } from 'react';
-import tracking from 'tracking'
-import Webcam from 'react-webcam'
 
-class Camera extends Component {
-
+class Files extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            img: null,
-            resultado: {
-                resultado: '',
-                ambiente: '',
-                qualidade: '',
-                tipo: '',
-                camera: ''
-            }
+            file: null
         }
 
     }
 
-    setRef = webcam => {
-        this.webcam = webcam;
-    };
-
-    capture = () => {
-        const imageSrc = this.webcam.getScreenshot();
-        this.setState({ img: imageSrc })
+    handleChange(event) {
+        event.preventDefault()
+        this.setState({
+            file: URL.createObjectURL(event.target.files[0])
+        })
 
         var img = document.getElementById('img');
         var demoContainer = document.querySelector('.demo-container');
@@ -48,42 +36,22 @@ class Camera extends Component {
             rect.style.left = (img.offsetLeft + x) + 'px';
             rect.style.top = (img.offsetTop + y) + 'px';
         };
-
     }
 
     render() {
-        const videoConstraints = {
-            width: 1280,
-            height: 720,
-            facingMode: "user"
-        };
 
+        console.log(this)
         return (
-            <div className="content-camera">
-                <div className="capture-image">
-                    <Webcam
-                        audio={false}
-                        height={600}
-                        ref={this.setRef}
-                        screenshotFormat="image/png"
-                        width={600}
-                        videoConstraints={videoConstraints}
-                    />
-                </div>
+            <div className="file-upload">
+                <input type="file" required onChange={event => this.handleChange(event)} />
                 <div className="demo-frame">
                     <div className="demo-container">
-                        <img id="img" src={this.state.img} />
+                        <img id="img" src={this.state.file} />
                     </div>
                 </div>
-
-
-                <div id="resultado"></div>
-
-                <button onClick={this.capture} id="capture">Capture photo</button>
-
             </div>
         );
     }
 }
 
-export default Camera;
+export default Files;

@@ -10,28 +10,17 @@ class Account extends Component {
         super(props);
 
         this.state = {
-            user: null,
             loader: true
         }
 
     }
 
-    componentDidMount() {
-        const user = sessionStorage.getItem('data')
-
-        if (user) {
-            const jsonUser = JSON.parse(user)
-            this.setState({ user: jsonUser, loader: false })
-        } else {
-            window.location.href = "/home"
-        }
-    }
-
     render() {
         const results = this.props.results["results"]
-        console.log(results)
+        const { user } = this.props.user.data
+        console.log(this)
         return (
-            this.state.loader || results == false ? (
+            this.state.loader && results == false ? (
                 <Loader />
             ) : (
                     <div className="account" id="account">
@@ -39,12 +28,10 @@ class Account extends Component {
                             <div className="content-user">
                                 <h1 className="user-title">Usuário</h1>
                                 <h2 className="name-user">
-                                    Nome:
-                                    {this.state.user.data.user.name}
+                                    Nome: {user.name}
                                 </h2>
                                 <h2 className="name-user email">
-                                    Email:
-                                    {this.state.user.data.user.email}
+                                    Email: {user.email}
                                 </h2>
                             </div>
                         </div>
@@ -68,6 +55,7 @@ class Account extends Component {
                                             <h1 className="results-title">Resultados encontrados: {results.length}</h1>
                                             {
                                                 results.map((result, i) => {
+                                                    console.log(result)
                                                     return (
                                                         <div className="result-card" key={i}>
                                                             <p className="contagem-result">
@@ -77,9 +65,7 @@ class Account extends Component {
                                                                 }
                                                             </p>
                                                             <div className="img-result">
-                                                                {
-                                                                    result.image
-                                                                }
+                                                                <img src={result.imagem} />
                                                             </div>
                                                             <div className="result-text">
                                                                 <b className="result-b">Resultado gerado:</b>

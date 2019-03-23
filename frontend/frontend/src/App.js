@@ -79,7 +79,7 @@ class App extends Component {
                             <Header user={this.state.user ? this.state.user.data.user : null} />
                             <div id="main">
                                 <Container>
-                                    <Routers results={results} />
+                                    <Routers results={results} user={this.state.user} />
                                 </Container>
                             </div>
                             <Footer />
