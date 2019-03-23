@@ -240,3 +240,48 @@ video {
     height: auto;
     margin-bottom: 15px;
 }
+
+.demo-container {
+    width: 600px;
+    height: 600px;
+    position: relative;
+    background: #eee;
+    overflow: hidden;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+
+.rect {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    left: -1000px;
+    top: -1000px;
+}
+
+button.button-file {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 21px;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    color: #fff;
+    background: #1abc9c;
+    cursor: pointer;
+}
+
+.imagem-content {
+    padding: 20px 0px;
+
+
+}
+.content-camera {
+    padding: 50px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
